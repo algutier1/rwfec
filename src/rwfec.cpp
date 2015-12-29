@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include <stdio.h>
 using namespace Rcpp;
 
 // This is a simple example of exporting a C++ function to R. You can
@@ -35,8 +36,6 @@ List rcpp_hello() {
   return z;
 }
 
-
-
 NumericVector correlateCpp(NumericVector a, NumericVector b) {
   int na = a.size(), nb = b.size();
   int nab = na + nb -1;
@@ -45,6 +44,25 @@ NumericVector correlateCpp(NumericVector a, NumericVector b) {
     for (int j = 0; j < nb; j++)
       xab[i+j] += a[i] * b[j];
   return xab;
+}
+
+// Convolution Example
+//          inf
+//y(n) =    sum[x(k)h(n-k)]
+//       k=-inf
+// [[Rcpp::export]]
+NumericVector rwconv(NumericVector h, NumericVector x) {
+  int nh = h.size(), nx = x.size();
+  int ny = nh + nx - 1;
+  NumericVector y(ny);
+  for (int n = 0; n < ny; n++) {
+    for (int k = 0; k <= n; k++)  { 
+   /*  printf("n = %d, k = %d, n-k = %d, x[%d] = %f, h[%d]=%f, y[%d] = %f \n",n, k, n-k, k, x[k], n-k, h[n-k], n, y[n]);*/
+      y[n] += x[k]*h[n-k];
+    }
+  if (y[n] < 1e-10 ) y[n] = 0;
+  }
+  return y;
 }
 
 

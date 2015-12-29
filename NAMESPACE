@@ -3,7 +3,7 @@
 # exportPattern("^[[:alpha:]]+") ... this causes errors ... therefore add explicit exports
 importFrom(Rcpp, evalCpp)
 useDynLib(rwfec)
-export(sinc,rcpp_hello)
+export(sinc,rcpp_hello,rwconv)
 
 # manual exports
 export(hello)
