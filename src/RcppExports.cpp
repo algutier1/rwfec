@@ -26,6 +26,31 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// rwconv
+NumericVector rwconv(NumericVector h, NumericVector x);
+RcppExport SEXP rwfec_rwconv(SEXP hSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type h(hSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    __result = Rcpp::wrap(rwconv(h, x));
+    return __result;
+END_RCPP
+}
+// rwviterbi
+NumericVector rwviterbi(NumericVector x, NumericMatrix G, NumericVector v);
+RcppExport SEXP rwfec_rwviterbi(SEXP xSEXP, SEXP GSEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type G(GSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type v(vSEXP);
+    __result = Rcpp::wrap(rwviterbi(x, G, v));
+    return __result;
+END_RCPP
+}
 // sinc
 NumericVector sinc(NumericVector x);
 RcppExport SEXP rwfec_sinc(SEXP xSEXP) {

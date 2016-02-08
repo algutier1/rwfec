@@ -9,6 +9,14 @@ rcpp_hello <- function() {
     .Call('rwfec_rcpp_hello', PACKAGE = 'rwfec')
 }
 
+rwconv <- function(h, x) {
+    .Call('rwfec_rwconv', PACKAGE = 'rwfec', h, x)
+}
+
+rwviterbi <- function(x, G, v) {
+    .Call('rwfec_rwviterbi', PACKAGE = 'rwfec', x, G, v)
+}
+
 sinc <- function(x) {
     .Call('rwfec_sinc', PACKAGE = 'rwfec', x)
 }
